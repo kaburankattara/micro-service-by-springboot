@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Extention ###
+.DS_Store
