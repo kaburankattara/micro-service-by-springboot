@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+
+  nginx:
+    image: nginx:1.25.1
+    container_name: api-gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/volumes/etc/nginx/conf.d:/etc/nginx/conf.d
