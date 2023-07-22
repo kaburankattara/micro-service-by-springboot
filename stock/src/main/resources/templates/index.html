@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>在庫</title>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow, noarchive" >
+</head>
+<body>
+    <h3>在庫一覧</h3>
+    <span>在庫</span>
+    </br>
+    <span th:text="${stock.getNowCount()}">dummy</span>
+    </br>
+    <form th:action="@{${@StockConst.URL_ADD}}" method="get">
+        <input type="submit" value="在庫を10追加する">
+    </form>
+</body>
+</html>
