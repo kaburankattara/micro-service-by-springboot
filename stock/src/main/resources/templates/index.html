@@ -10,9 +10,9 @@
     <h3>在庫一覧</h3>
     <span>在庫</span>
     </br>
-    <span th:text="${stock.getNowCount()}">dummy</span>
+    <span th:text="${stock.getStockCountOfNow()}">dummy</span>
     </br>
-    <form th:action="@{${@StockConst.URL_ADD}}" method="get">
+    <form th:action="@{${@StockManagerConst.URL_ADD}}" method="get">
         <input type="submit" value="在庫を10追加する">
     </form>
 </body>

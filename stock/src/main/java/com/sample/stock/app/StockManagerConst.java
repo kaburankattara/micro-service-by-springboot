@@ -2,8 +2,8 @@ package com.sample.stock.app;
 
 import org.springframework.stereotype.Component;
 
-@Component("StockConst")
-public class StockConst {
+@Component("StockManagerConst")
+public class StockManagerConst {
 
     public static final String URL_BEAN_ROOT = "/stock";
     public static final String URL_BEAN_VIEW = "/view";

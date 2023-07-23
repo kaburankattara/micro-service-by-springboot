@@ -1,27 +1,33 @@
 package com.sample.stock.domain.stock;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.sample.stock.infra.table.t_stock.TStockEntity;
 
-@Setter
-@Getter
-public class Stock {
+public class Stock extends TStockEntity {
 
-    public static Stock createInstance(int initCount, int nowCount) {
-        return new Stock(initCount, nowCount);
+    public static Stock createInstanceForAdd(long stockId, int stockCountOfInit) {
+        return createInstance(stockId, stockCountOfInit, stockCountOfInit);
     }
 
-    public static Stock createInstanceForAdd(int initCount) {
-        return new Stock(initCount, initCount);
+    public static Stock createInstance(TStockEntity entity) {
+        return new Stock(entity.getStockId(), entity.getStockCountOfInit(), entity.getStockCountOfNow());
     }
 
-    private int initCount;
+    public static Stock createInstance(long stockId, int stockCountOfInit, int stockCountOfNow) {
+        return new Stock(stockId, stockCountOfInit, stockCountOfNow);
+    }
 
-    private int nowCount;
+    public Stock(long stockId, int stockCountOfInit, int stockCountOfNow) {
+        this.setStockId(stockId);
+        this.setStockCountOfInit(stockCountOfInit);
+        this.setStockCountOfNow(stockCountOfNow);
+    }
 
-    public Stock(int initCount, int nowCount) {
-        this.initCount = initCount;
-        this.nowCount = nowCount;
+    public TStockEntity toEntity() {
+        TStockEntity entity = new TStockEntity();
+        entity.setStockId(getStockId());
+        entity.setStockCountOfInit(getStockCountOfInit());
+        entity.setStockCountOfNow(getStockCountOfNow());
+        return entity;
     }
 
 }
