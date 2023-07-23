@@ -9,3 +9,65 @@ services:
       - "80:80"
     volumes:
       - ./nginx/volumes/etc/nginx/conf.d:/etc/nginx/conf.d
+
+#  zookeeper:
+#    image: confluentinc/cp-zookeeper:7.2.1
+#    container_name: zookeeper
+#    environment:
+#      TZ: Asia/Tokyo
+#      ZOOKEEPER_CLIENT_PORT: 2181
+#      ZOOKEEPER_TICK_TIME: 2000
+#
+#  kafka0:
+#    image: confluentinc/cp-kafka:7.2.1
+#    container_name: kafka0
+#    ports:
+#      - "9092:9092"
+#    depends_on:
+#      - zookeeper
+#    environment:
+#      TZ: Asia/Tokyo
+#      KAFKA_BROKER_ID: 1
+#      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka0:29092
+#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+#
+#  kafka-ui:
+#    container_name: kafka-ui
+#    image: provectuslabs/kafka-ui:latest
+#    ports:
+#      - 3000:8080
+#    depends_on:
+#      - kafka0
+#    restart: always
+#    environment:
+#      TZ: Asia/Tokyo
+#      KAFKA_CLUSTERS_0_NAME: kafka-0
+#      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka0:29092
+
+#  order-received-db:
+#    image: oracle/database:21.3.0-xe
+#    container_name: order-received-db
+#    ports:
+#      - 1521:1521
+#    volumes:
+#      - ./order-received-db/volumes/opt/oracle/oradata/:/opt/oracle/oradata
+#      - ./order-received-db/volumes/opt/oracle/scripts/setup:/opt/oracle/scripts/setup  # コンテナ作成時に実行
+#      - ./order-received-db/volumes/opt/oracle/scripts/startup:/opt/oracle/scripts/startup # コンテナ起動時に実行
+#    environment:
+#      - ORACLE_PWD=passw0rd
+
+  stock-db:
+    image: oracle/database:21.3.0-xe
+    container_name: stock-db
+    ports:
+      - 1522:1521
+    volumes:
+      - ./stock-db/volumes/opt/oracle/oradata/:/opt/oracle/oradata
+      - ./stock-db/volumes/opt/oracle/scripts/setup:/opt/oracle/scripts/setup  # コンテナ作成時に実行
+      - ./stock-db/volumes/opt/oracle/scripts/startup:/opt/oracle/scripts/startup # コンテナ起動時に実行
+    environment:
+      - ORACLE_PWD=passw0rd
