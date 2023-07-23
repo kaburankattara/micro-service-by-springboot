@@ -38,3 +38,4 @@ out/
 
 ### Extention ###
 .DS_Store
+**/volumes/opt/oracle/oradata
