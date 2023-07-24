@@ -1,8 +1,11 @@
 package com.sample.stock.domain.stock;
 
+import com.sample.stock.infra.table.t_stock.TStockEntity;
 import com.sample.stock.infra.table.t_stock.TStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class StockService {
@@ -17,6 +20,14 @@ public class StockService {
     public Stock createStock(int stockCountOfInit) {
         long stockId = repository.getStockId();
         return Stock.createInstanceForAdd(stockId, stockCountOfInit);
+    }
+
+    public Stock findStock(long stockId) {
+        Optional<TStockEntity> op = repository.findById(stockId);
+        if (op.isPresent()) {
+            return Stock.createInstance(op.get());
+        }
+        return  Stock.createEmptyInstance();
     }
 
     public Stock add(Stock stock) {

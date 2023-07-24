@@ -28,7 +28,7 @@ public class StockManagerController {
 
     @GetMapping(URL_BEAN_VIEW)
     public String view(Model model) {
-        Stock stock = service.add(10);
+        Stock stock = service.add(1,10);
         model.addAttribute("stock", stock);
         return "index";
     }

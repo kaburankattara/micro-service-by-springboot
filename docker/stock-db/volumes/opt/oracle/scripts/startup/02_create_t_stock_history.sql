@@ -5,18 +5,20 @@ ALTER SESSION SET CONTAINER=pdb01;
 DEFINE USER_NAME='hogeuser';
 
 -- テーブル作成
-CREATE TABLE &USER_NAME..t_stock
+CREATE TABLE &USER_NAME..t_stock_history
 (
-    stock_id NUMBER NOT NULL
-    , stock_count_of_init NUMBER NOT NULL
-    , stock_count_of_now NUMBER NOT NULL
-    , CONSTRAINT t_stock_pk PRIMARY KEY(stock_id)
+    stock_history_id NUMBER NOT NULL
+    , subject VARCHAR2(50) NOT NULL
+    , stock_id NUMBER NOT NULL
+    , stock_count NUMBER NOT NULL
+    , add_time TIMESTAMP NOT NULL
+    , CONSTRAINT t_stock_history_pk PRIMARY KEY(stock_history_id)
  )
 ;
 
 -- シーケンスを設定
 -- CACHEはパフォーマンスを向上させるために使用されるオプション。必須ではない。
-CREATE SEQUENCE stock_id_sequence
+CREATE SEQUENCE stock_history_id_sequence
   START WITH 1
   INCREMENT BY 1
   CACHE 20;

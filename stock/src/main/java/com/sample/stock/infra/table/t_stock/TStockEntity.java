@@ -17,13 +17,13 @@ public class TStockEntity {
     //主キー項目に「@Id」を付与し、その値を自動生成するにはアノテーション
     //「@GeneratedValue(strategy = GenerationType.AUTO)」を付与する
     @Id
-    private long stockId;
+    private Long stockId;
 
     @Column(name="stock_count_of_init")
-    private int stockCountOfInit;
+    private Integer stockCountOfInit;
 
     //カラム名を「@Column」アノテーションで指定
     @Column(name="stock_count_of_now")
-    private int stockCountOfNow;
+    private Integer stockCountOfNow;
 
 }

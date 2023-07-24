@@ -12,6 +12,10 @@ public class Stock extends TStockEntity {
         return new Stock(entity.getStockId(), entity.getStockCountOfInit(), entity.getStockCountOfNow());
     }
 
+    public static Stock createEmptyInstance() {
+        return new Stock();
+    }
+
     public static Stock createInstance(long stockId, int stockCountOfInit, int stockCountOfNow) {
         return new Stock(stockId, stockCountOfInit, stockCountOfNow);
     }
@@ -22,12 +26,23 @@ public class Stock extends TStockEntity {
         this.setStockCountOfNow(stockCountOfNow);
     }
 
+    public Stock() {
+    }
+
     public TStockEntity toEntity() {
         TStockEntity entity = new TStockEntity();
         entity.setStockId(getStockId());
         entity.setStockCountOfInit(getStockCountOfInit());
         entity.setStockCountOfNow(getStockCountOfNow());
         return entity;
+    }
+
+    public boolean isEmpty() {
+        return getStockId() == null;
+    }
+
+    public void addStockCount(int stockCount) {
+        setStockCountOfNow(getStockCountOfNow() + stockCount);
     }
 
 }
