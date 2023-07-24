@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import static com.sample.stock.app.StockManagerConst.*;
 
@@ -28,14 +28,19 @@ public class StockManagerController {
 
     @GetMapping(URL_BEAN_VIEW)
     public String view(Model model) {
-        Stock stock = service.add(1,10);
-        model.addAttribute("stock", stock);
+        try {
+            Stock stock = service.findStock();
+            model.addAttribute("stock", stock);
+        } catch (Exception e) {
+            // TODO
+        }
+
         return "index";
     }
 
-    @ResponseBody
     @GetMapping(URL_BEAN_ADD)
-    public String add() {
-        return "在庫を追加します";
+    public String add(@RequestParam("stockId") long stockId) {
+        Stock stock = service.add(stockId,10);
+        return index();
     }
 }

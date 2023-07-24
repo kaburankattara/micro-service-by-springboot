@@ -13,6 +13,7 @@
     <span th:text="${stock.getStockCountOfNow()}">dummy</span>
     </br>
     <form th:action="@{${@StockManagerConst.URL_ADD}}" method="get">
+        <input type="hidden" id="stockId" name="stockId" th:value="${stock.getStockId}">
         <input type="submit" value="在庫を10追加する">
     </form>
 </body>

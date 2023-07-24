@@ -26,6 +26,26 @@ public class StockManagerService {
         this.stockHistoryService = stockHistoryService;
     }
 
+    public Stock findStock() {
+        int stockCount = 0;
+
+        try {
+            // 在庫を取得。なければ新規追加する
+            Stock stock = stockService.findAllStock().getFirst();
+            if (stock.isEmpty()) {
+                stock = stockService.createStock(stockCount);
+            }
+
+            StockHistory stockHistory = stockHistoryService.createStockHistory(
+                    SUBJECT_STOCK_ADD, stock.getStockId(), stockCount, LocalDateTime.now());
+            stockHistoryService.add(stockHistory);
+
+            return stockService.add(stock);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public Stock add(long stockId, int stockCount) {
 
         try {
