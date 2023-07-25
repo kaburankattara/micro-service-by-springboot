@@ -32,6 +32,7 @@ public class StockManagerController {
             Stock stock = service.findStock();
             model.addAttribute("stock", stock);
         } catch (Exception e) {
+            e.printStackTrace();
             // TODO
         }
 

@@ -1,8 +1,12 @@
 package com.sample.stock.domain.stock;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sample.stock.infra.json.Json;
+import com.sample.stock.infra.messaging.KafkaConfig;
 import com.sample.stock.infra.table.t_stock.TStockEntity;
 import com.sample.stock.infra.table.t_stock.TStockRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,7 +41,18 @@ public class StockService {
     }
 
     public Stock add(Stock stock) {
-        return Stock.createInstance(repository.save(stock.toEntity()));
+        try {
+            Stock addedStock = Stock.createInstance(repository.save(stock.toEntity()));
+
+            KafkaConfig kafka = new KafkaConfig();
+            KafkaTemplate<Integer, String> template = kafka.kafkaTemplate();
+            template.send("addStock", Json.toJson(stock.toEntity()));
+
+            return addedStock;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
 }

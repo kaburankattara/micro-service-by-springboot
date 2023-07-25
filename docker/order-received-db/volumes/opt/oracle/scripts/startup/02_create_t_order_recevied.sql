@@ -8,8 +8,9 @@ DEFINE USER_NAME='hogeuser';
 CREATE TABLE &USER_NAME..t_order_recevied
 (
     order_received_id NUMBER NOT NULL
+    , stock_id NUMBER NOT NULL
     , order_received_count NUMBER NOT NULL
-    , CONSTRAINT pk1 PRIMARY KEY(order_received_id)
+    , CONSTRAINT t_order_received_pk PRIMARY KEY(order_received_id)
  )
 ;
 
